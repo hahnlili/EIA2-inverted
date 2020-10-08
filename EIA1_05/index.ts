@@ -25,6 +25,7 @@ satz3 += Math.round(differenzEuropa) + " kg CO2 verändert";
 
 
 console.log(satz1 + satz2 + satz3);
+console.log(africaEmissions, southAfricaEmissions, northAmericaEmissions, asiaEmissions, australiaEmissions)
 
 
 
