@@ -1,0 +1,20 @@
+"use strict";
+let europeEmissions = 4209.3;
+let europe2008 = 4965.7;
+let africaEmissions = 1235.5;
+let southAfricaEmissions = 1261.5;
+let northAmericaEmissions = 6035.6;
+let asiaEmissions = 16274.1;
+let australiaEmissions = 2100.5;
+let worldEmissions = europeEmissions + africaEmissions + southAfricaEmissions + northAmericaEmissions + asiaEmissions + australiaEmissions;
+let satz1 = "Die Emission von Europa ist ";
+satz1 += europeEmissions + " CO2.";
+let keineLustZuRechnen = " please fill out the gap.";
+let satz2 = " Relativ zur Gesamtemission der Welt verursacht Europe damit";
+satz2 += keineLustZuRechnen;
+let differenzEuropa = europeEmissions;
+differenzEuropa = europeEmissions - europe2008;
+let satz3 = " Für Europa hat sich 2018 im Vergleich zu 2008 die Emission um ca. ";
+satz3 += Math.round(differenzEuropa) + " kg CO2 verändert";
+console.log(satz1 + satz2 + satz3);
+//# sourceMappingURL=index.js.map
