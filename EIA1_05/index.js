@@ -17,4 +17,5 @@ differenzEuropa = europeEmissions - europe2008;
 let satz3 = " Für Europa hat sich 2018 im Vergleich zu 2008 die Emission um ca. ";
 satz3 += Math.round(differenzEuropa) + " kg CO2 verändert";
 console.log(satz1 + satz2 + satz3);
+console.log(africaEmissions, southAfricaEmissions, northAmericaEmissions, asiaEmissions, australiaEmissions);
 //# sourceMappingURL=index.js.map
