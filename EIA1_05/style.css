@@ -23,3 +23,7 @@ footer p {
     font-size: 10px;
     opacity: .5;
 }
+
+img:hover{
+    cursor: grab;
+}
