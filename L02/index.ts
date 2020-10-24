@@ -1,37 +1,40 @@
-namespace L02_Phases {
+namespace BlackmailCompanion {
+    console.log("lol")
+
+    let chosenCharacter : string = "A";
     window.addEventListener("load", handleLoad);
 
-    function handleLoad(_event: Event): void {
-        // create button and add to DOM
-        let button: HTMLButtonElement = document.createElement("button");
-        button.textContent = "Click";
-        document.body.appendChild(button);
+function handleLoad(_event : Event): void{
+    let mail : HTMLElement = <HTMLElement>document.querySelector("div#mail");
+    mail.addEventListener("click", placeLetter);
+    document.addEventListener("keydown", chooseCharacter);
+}
 
-        // install listeners to all ancestors of button in DOM
-        installListenersInDOM(button);
+function placeLetter(_event : MouseEvent): void{
+    // console.log(_event);
+    let x: number = _event.offsetX;
+    let y: number = _event.offsetY;
 
-        // window is not a member of the DOM-tree, so install listeners separately  
-        window.addEventListener("click", handleClick);
-        window.addEventListener("click", handleClick, true);
-    }
+    let mail: HTMLElement = <HTMLElement>_event.target;
+    let letter : HTMLSpanElement = document.createElement("span");
+    mail.appendChild(letter);
 
-    function handleClick(_event: Event): void {
-        if (_event.currentTarget == window && _event.eventPhase == 1)
-            console.warn("Event started: " + _event.type);
-        console.groupCollapsed("Event-Phase = " + _event.eventPhase + " | CurrentTarget = " + _event.currentTarget);
-        console.log("Target: " + _event.target);
-        console.log("Path: " + _event.composedPath());
-        console.groupEnd();
-    }
+    letter.textContent = chosenCharacter;
+    letter.style.left = x + "px";
+    letter.style.top = y + "px";
 
-    function installListenersInDOM(_target: HTMLElement): void {
-        while (true) {
-            _target.addEventListener("click", handleClick);
-            _target.addEventListener("click", handleClick, true);
-            if (_target.parentElement)
-                _target = _target.parentElement;
-            else
-                break;
-        }
-    }
+    letter.addEventListener("click",deleteLetter);  
+
+}
+
+function chooseCharacter(_event : KeyboardEvent): void {
+    // console.log(_event);
+    chosenCharacter = _event.key;
+
+}
+function deleteLetter(_event : MouseEvent): void{
+    let target : Node =<Node>_event.target;
+    let parent : Node =<Node>target.parentNode;
+    parent.removeChild(target);
+}
 }
