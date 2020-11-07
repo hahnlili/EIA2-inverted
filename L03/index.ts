@@ -1,66 +1,43 @@
 namespace cocktailbar{
-    window.addEventListener("load", init); //Seite geladen
+    window.addEventListener("load", handleLoad); //Seite geladen
 
     function handleLoad(_event:Event):void{
-        let form: HTMLElement = <HTMLElement>document.querySelector("div#form"); //nach div element suchen
+        console.log("start");
+        let form: HTMLDivElement = <HTMLDivElement>document.querySelector("div#form"); //nach div element suchen
         form.addEventListener("change",handleChange); //listener installieren
-        let slider: HTMLElement = <HTMLElement>document.querySelector("div#amount"); //nach div element suchen
-        slider.addEventListener("input", displayAmount);
+        let slider: HTMLInputElement = <HTMLInputElement>document.querySelector("input#size"); //nach div element suchen
+        slider.addEventListener("input", displaySize);
     }
     function handleChange(_event:Event):void{
-        console.log("i dont wanna");
-        // let displayOrder
-    }
-    function displayAmount(_event:Event):void{
-        let progress: HTMLElement = <HTMLElement>document.querySelector("progress"); // progress wurde als Element gefunden
-        let amount: string = (<HTMLInputElement>_event.target).value; //amount wurde als target gesetzt
-        progress.value = parseFloat(amount);
+    //     // console.log(_event);
+    //     // let displayOrder
+    //     // let drink : HTMLSelectElement = <HTMLSelectElement>document.querySelector("select");
+    //     // console.log(drink.value);
+
+    //     let inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll("input");
+    //     console.log(inputs);
+
+
+        let order : HTMLDivElement = <HTMLDivElement>document.querySelector("div#order");
+        order.innerHTML = "";
+
+        let formData : FormData = new FormData(document.forms[0]);
+        console.log(formData);
+
+        for (let entry of formData){
+            // console.log(entry);
+            let item : HTMLInputElement = <HTMLInputElement>document.querySelector("[value = '" + entry[1] + "']");
+            // console.log(item);
+            let price: number = Number(item.getAttribute("price"));
+            // console.log(price);
+
+            order.innerHTML += item.name + " €" + price +"</br>"; 
+        }
 
     }
-
-// namespace L03_FormElements {
-//     window.addEventListener("load", init);
-
-//     function init(_event: Event): void {
-//         console.log("Init");
-//         let fieldsets: NodeListOf<HTMLFieldSetElement> = document.querySelectorAll("fieldset");
-
-//         // Install listeners on fieldsets
-//         for (let i: number = 0; i < fieldsets.length; i++) {
-//             let fieldset: HTMLFieldSetElement = fieldsets[i];
-//             fieldset.addEventListener("change", handleChange);
-//             fieldset.addEventListener("input", handleChange);
-//         }
-//     }
-
-//     function handleChange(_event: Event): void {
-//         let target: HTMLInputElement = <HTMLInputElement>_event.target;
-//         console.log();
-//         if (_event.type == "change")
-//             console.warn("Change: " + target.name + " = " + target.value, _event);
-//         else
-//             console.log("Input: " + target.name + " = " + target.value, _event);
-
-//         // Handling checkbox
-//         if (target.type == "checkbox")
-//             console.log("Checked: " + target.name + " = " + target.checked);
-
-//        // Slider response
-//         if (target.name == "Slider") {
-//             let progress: HTMLProgressElement = <HTMLProgressElement>document.getElementsByTagName("progress")[0];
-//             progress.value = parseFloat(target.value);
-//         }
-
-//        // Meter response
-//         if (target.name == "Stepper") {
-//             let meter: HTMLMeterElement = <HTMLMeterElement>document.querySelector("meter");
-//             meter.value = parseFloat(target.value);
-//         }
-
-//         //Color response
-//         if (target.name == "Color") {
-//             let ouput: HTMLOutputElement = <HTMLOutputElement>document.querySelector("output");
-//             ouput.value = target.value;
-//         }
-//     }
-// 
+    function displaySize(_event:Event):void{
+        let progress: HTMLProgressElement = <HTMLProgressElement>document.querySelector("progress"); // progress wurde als Element gefunden
+        let size: string = (<HTMLInputElement>_event.target).value; //size wurde als target gesetzt
+        progress.value = parseFloat(size);
+    }
+}
